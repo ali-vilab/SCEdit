@@ -55,7 +55,7 @@ python scepter/tools/run_train.py --cfg scepter/methods/SCEdit/t2i_sd21_768_sce.
 # SD XL
 python scepter/tools/run_train.py --cfg scepter/methods/SCEdit/t2i_sdxl_1024_sce.yaml
 ```
-For rapid integration, kindly refer to our implementation of SCEdit in [SWIFT](https://github.com/modelscope/swift), specifically within the [scetuning_components](https://github.com/modelscope/swift/blob/main/swift/tuners/scetuning/scetuning_components.py). Additionally, in the upcoming week, we will be releasing an independent implementation of SCEdit under [SCEPTER](https://github.com/modelscope/scepter), which aims to provide developers with greater flexibility when working with SCEdit.
+For rapid integration, kindly refer to our implementation of SCEdit in [SWIFT](https://github.com/modelscope/swift), specifically within the [scetuning_components](https://github.com/modelscope/swift/blob/main/swift/tuners/scetuning/scetuning_components.py). Additionally, in the upcoming week, we will release an independent implementation of SCEdit under [SCEPTER](https://github.com/modelscope/scepter), which aims to provide developers with greater flexibility when working with SCEdit.
 
 - Installation
 ```shell

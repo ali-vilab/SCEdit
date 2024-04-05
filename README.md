@@ -1,6 +1,7 @@
 <p align="center">
 
-  <h2 align="center">🪄SCEdit: Efficient and Controllable Image Diffusion Generation via Skip Connection Editing</h2>
+  <h2 align="center">SCEdit: Efficient and Controllable Image Diffusion Generation via Skip Connection Editing</h2>
+  <h3 align="center">(CVPR 2024 Highlight)</h3>
   <p align="center">
     <strong>Zeyinzi Jiang</strong>
     ·
@@ -12,13 +13,13 @@
     ·
     <strong>Jingfeng Zhang</strong>
     <br>
+    <b>Alibaba Group</b>
     <br>
         <a href="https://arxiv.org/abs/2312.11392"><img src='https://img.shields.io/badge/arXiv-SCEdit-red' alt='Paper PDF'></a>
         <a href='https://scedit.github.io/'><img src='https://img.shields.io/badge/Project_Page-SCEdit-green' alt='Project Page'></a>
         <a href='https://github.com/modelscope/scepter'><img src='https://img.shields.io/badge/scepter-SCEdit-yellow'></a>
         <a href='https://github.com/modelscope/swift'><img src='https://img.shields.io/badge/swift-SCEdit-blue'></a>
     <br>
-    <b>Alibaba Group</b>
   </p>
   
   <table align="center">
@@ -33,7 +34,7 @@ SCEdit is an efficient generative fine-tuning framework proposed by Alibaba Tong
 
 ## News
 
-* **[2023.12.29]** Official implementations: [🪄SCEPTER](https://github.com/modelscope/scepter) library.
+* **[2023.12.29]** Official implementations: code and models have been made public on [🪄SCEPTER](https://github.com/modelscope/scepter) library.
 * **[2023.12.28]** Integrate into the [SWIFT](https://github.com/modelscope/swift)(Scalable lightWeight Infrastructure for Fine-Tuning) library.
 * **[2023.12.18]** We propose [SCEdit](https://arxiv.org/abs/2312.11392), an efficient and controllable generation framework.
 
@@ -43,25 +44,33 @@ For a complete implementation, please refer to [🪄SCEPTER](https://github.com/
 - Installation
 ```shell
 git clone https://github.com/modelscope/scepter.git
-cd scepter
-pip install -r requirements.txt
 ```
-- Training
+- Text-to-Image Generation
 ```shell
 # SD v1.5
-python scepter/tools/run_train.py --cfg scepter/methods/SCEdit/t2i_sd15_512_sce.yaml 
+python scepter/tools/run_train.py --cfg scepter/methods/scedit/t2i/sd15_512_sce_t2i.yaml
 # SD v2.1
-python scepter/tools/run_train.py --cfg scepter/methods/SCEdit/t2i_sd21_768_sce.yaml
+python scepter/tools/run_train.py --cfg scepter/methods/scedit/t2i/sd21_768_sce_t2i.yaml
 # SD XL
-python scepter/tools/run_train.py --cfg scepter/methods/SCEdit/t2i_sdxl_1024_sce.yaml
+python scepter/tools/run_train.py --cfg scepter/methods/scedit/t2i/sdxl_1024_sce_t2i.yaml
 ```
-For rapid integration, kindly refer to our implementation of SCEdit in [SWIFT](https://github.com/modelscope/swift), specifically within the [scetuning_components](https://github.com/modelscope/swift/blob/main/swift/tuners/scetuning/scetuning_components.py). Additionally, in the upcoming week, we will release an independent implementation of SCEdit under [SCEPTER](https://github.com/modelscope/scepter), which aims to provide developers with greater flexibility when working with SCEdit.
-
+- Controllable Image Synthesis
+```shell
+# SD v1.5 + hed
+python scepter/tools/run_train.py --cfg scepter/methods/scedit/ctr/sd15_512_sce_ctr_hed.yaml
+# SD v2.1 + canny
+python scepter/tools/run_train.py --cfg scepter/methods/scedit/ctr/sd21_768_sce_ctr_canny.yaml
+# SD XL + depth
+python scepter/tools/run_train.py --cfg scepter/methods/scedit/ctr/sdxl_1024_sce_ctr_depth.yaml
+```
+- Gradio
+```shell
+python -m scepter.tools.webui
+```
+We release an independent implementation of SCEdit under [SCEPTER](https://github.com/modelscope/scepter), which aims to provide developers with greater flexibility when working with SCEdit. Additionally, for rapid integration, kindly refer to our implementation of SCEdit in [SWIFT](https://github.com/modelscope/swift), specifically within the [scetuning_components](https://github.com/modelscope/swift/blob/main/swift/tuners/scetuning/scetuning_components.py). 
 - Installation
 ```shell
-pip install ms_swift@git+https://github.com/modelscope/swift.git # for the latest version
-or 
-pip install ms_swift  # for the released version
+pip install ms_swift
 ```
 - Training
 ```python
@@ -73,12 +82,6 @@ tuner_config = SCETuningConfig(
 model = Swift.prepare_model(model, tuner_config)
 print(model.get_trainable_parameters())
 ```
-
-## TODO
-
-- [x] Text-to-Image Generation Code Release (SDv1.5 / SDv2.1 / SDXL)
-- [ ] Controllable Image Synthesis Code & Model Release
-- [ ] Gradio Demo
 
 ## BibTeX
 
